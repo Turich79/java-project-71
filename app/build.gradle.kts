@@ -2,6 +2,7 @@ plugins {
     id("java")
     application
     checkstyle
+//    jacoco
 }
 
 group = "hexlet.code"
@@ -30,3 +31,5 @@ tasks.test {
 tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
 }
+
+//tasks.jacocoTestReport { reports { xml.required.set(true) } }
