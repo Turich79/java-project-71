@@ -1,69 +1,96 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
-        String content1 = readFile(filepath1);
-        String content2 = readFile(filepath2);
 
-        Map<String, Object> map1 = makeMap(content1);
-        Map<String, Object> map2 = makeMap(content2);
 
-        return compareMap(map1, map2);
+        Map<String, Object> map1 = Parser.parse(filepath1);
+        Map<String, Object> map2 = Parser.parse(filepath2);
+
+        List<Map<String, Object>> listComp = compareMaps(map1, map2);
+
+        return Formatter.formStyle(listComp, format);
+
     }
 
-    public static String readFile(String filepath) throws Exception {
-        Path file1 = Paths.get(filepath).toAbsolutePath().normalize();
-        if (!Files.exists(file1)) {
-            throw new Exception("File '" + filepath + "' does not exist");
-        }
-        return Files.readString(file1);
-    }
+    private static List<Map<String, Object>> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
+        List<Map<String, Object>> result = new ArrayList<>();
 
-    public static Map<String, Object> makeMap(String content) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(content, new TypeReference<Map<String, Object>>() { });
-    }
+        Set<String> keysSet = new TreeSet<>(map1.keySet());
+        keysSet.addAll(map2.keySet());
 
-    public static String compareMap(Map<String, Object> map1, Map<String, Object> map2) {
-        String result = "{\n";
-        TreeMap<String, Object> treeMapAll = new TreeMap<>(map1);
-        //сначала делаем общий Мар, чтобы были все ключи в нем
-        treeMapAll.putAll(map2);
-
-        for (Map.Entry<String, Object> entry : treeMapAll.entrySet()) {
-            String key = entry.getKey();
+        for (String key : keysSet) {
             boolean has1 = map1.containsKey(key);
             boolean has2 = map2.containsKey(key);
+            Map<String, Object> map = new LinkedHashMap<>();
             if (has1 && has2) {
                 Object value1 = map1.get(key);
                 Object value2 = map2.get(key);
-                if (value1.equals(value2)) {
-                    result += "    " + key + ": " + value1 + "\n";
+                if (!Objects.equals(value1, value2)) {
+                    map.put("key", key);
+                    map.put("oldValue", value1);
+                    map.put("newValue", value2);
+                    map.put("status", "updated");
                 } else {
-                    result += "  - " + key + ": " + value1 + "\n";
-                    result += "  + " + key + ": " + value2 + "\n";
+                    map.put("key", key);
+                    map.put("oldValue", value1);
+                    map.put("status", "unchanged");
                 }
             } else if (has1 && !has2) {
                 Object value1 = map1.get(key);
-                result += "  - " + key + ": " + value1 + "\n";
-            }  else if (!has1 && has2) {
+                map.put("key", key);
+                map.put("oldValue", value1);
+                map.put("status", "deleted");
+            } else if (!has1 && has2) {
                 Object value2 = map2.get(key);
-                result += "  + " + key + ": " + value2 + "\n";
+                map.put("key", key);
+                map.put("newValue", value2);
+                map.put("status", "added");
             }
+            result.add(map);
         }
-        result = result + "}";
 
         return result;
     }
-
 }
+
+
+//    private static String compareMap(Map<String, Object> map1, Map<String, Object> map2) {
+//        String result = "{\n";
+//        TreeMap<String, Object> treeMapAll = new TreeMap<>(map1);
+//        //сначала делаем общий Мар, чтобы были все ключи в нем
+//        treeMapAll.putAll(map2);
+//
+//        for (Map.Entry<String, Object> entry : treeMapAll.entrySet()) {
+//            String key = entry.getKey();
+//            boolean has1 = map1.containsKey(key);
+//            boolean has2 = map2.containsKey(key);
+//            if (has1 && has2) {
+//                Object value1 = map1.get(key);
+//                Object value2 = map2.get(key);
+//                if (value1.equals(value2)) {
+//                    result += "    " + key + ": " + value1 + "\n";
+//                } else {
+//                    result += "  - " + key + ": " + value1 + "\n";
+//                    result += "  + " + key + ": " + value2 + "\n";
+//                }
+//            } else if (has1 && !has2) {
+//                Object value1 = map1.get(key);
+//                result += "  - " + key + ": " + value1 + "\n";
+//            }  else if (!has1 && has2) {
+//                Object value2 = map2.get(key);
+//                result += "  + " + key + ": " + value2 + "\n";
+//            }
+//        }
+//        result = result + "}";
+//
+//        return result;
+//    }

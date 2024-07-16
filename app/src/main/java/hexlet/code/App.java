@@ -23,7 +23,8 @@ public class App implements Callable {
     @Option(names = {"-V", "--version"}, description = "Print version information and exit.")
     private boolean versionRequested = false;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]",
+    @Option(names = {"-f", "--format"}, paramLabel = "format",
+            description = "output format stylish, plain, json, no-format [default: ${DEFAULT-VALUE}]",
             defaultValue = "stylish")
     private String format;
 

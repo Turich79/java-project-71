@@ -18,6 +18,15 @@ run-dist:
 run-dist-files:
 	./build/install/app/bin/app -f=stylish file1.json file2.json
 
+run-stylish:
+	./build/install/app/bin/app -f stylish file1_.json file2_.json
+
+run-plain:
+	./build/install/app/bin/app -f plain file1_.json file2_.json
+
+run-json:
+	./build/install/app/bin/app -f json file1_.json file2_.json
+
 run:
 	./gradlew run
 
