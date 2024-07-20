@@ -5,14 +5,32 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ee99a9660e1db9665a52/test_coverage)](https://codeclimate.com/github/Turich79/java-project-71/test_coverage)
 
-## Описание проекта
+# Differ
+Differ - это утилита командной строки, которая сравнивает два файла конфигурации и показывает различия между ними.
 
-Вычислитель отличий – программа, определяющая разницу между двумя структурами данных. Это популярная задача, для решения которой существует множество онлайн-сервисов, например: http://www.jsondiff.com/. Подобный механизм используется при выводе тестов или при автоматическом отслеживании изменении в конфигурационных файлах.
+## Использование
 
-***Возможности утилиты:***
+Для использования утилиты необходимо выполнить следующие команды:
 
-- Поддержка разных входных форматов: yaml и json
-- Генерация отчета в виде plain text, stylish и json
-***
+* ./build/install/app/bin/app filepath1.json filepath2.json
+* ./build/install/app/bin/app filepath1.yml filepath2.yml
+* ./build/install/app/bin/app -f plain filepath1.json filepath2.json
+* ./build/install/app/bin/app -f json filepath1.json filepath2.json
+
+### где:
+
+*filepath1* - путь к первому файлу конфигурации.
+
+*filepath2* - путь ко второму файлу конфигурации.
+
+### Опции
+* -f, --format * - формат вывода различий. По умолчанию используется stylish.
+
+## Форматы вывода
+*stylish* - вывод в виде стилизованной таблицы.
+
+*plain* - вывод в виде простого списка различий.
+
+*json* - вывод в формате JSON.
 
 https://asciinema.org/a/Swduf0yNavL4TZQeHrfiBgvds
