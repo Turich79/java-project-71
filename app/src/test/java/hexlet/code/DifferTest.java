@@ -18,9 +18,9 @@ class DifferTest {
     private final String pathYml2 = "src/test/resources/file2.yml";
 
 //    private final Path testFile1 = Paths.get("src/test/resources/expected/test1").toAbsolutePath().normalize();
-    private final Path testFileJson = Paths.get("src/test/resources/expected/testJson.txt").toAbsolutePath().normalize();
-    private final Path testFilePlain = Paths.get("src/test/resources/expected/testPlain.txt").toAbsolutePath().normalize();
-    private final Path testFileStylish = Paths.get("src/test/resources/expected/testStylish.txt").toAbsolutePath().normalize();
+    private final Path tfj = Paths.get("src/test/resources/expected/testJson.txt").toAbsolutePath().normalize();
+    private final Path tfp = Paths.get("src/test/resources/expected/testPlain.txt").toAbsolutePath().normalize();
+    private final Path tfs = Paths.get("src/test/resources/expected/testStylish.txt").toAbsolutePath().normalize();
 
     @Test
     public void generateJsonStylishOld() throws Exception {
@@ -39,42 +39,42 @@ class DifferTest {
 
     @Test
     public void generateJsonPlain() throws Exception {
-        String expected = Files.readString(testFilePlain);
+        String expected = Files.readString(tfp);
         String was = Differ.generate(pathJson1, pathJson2, "plain");
         assertEquals(expected, was);
     }
 
     @Test
     public void generateYmlPlain() throws Exception {
-        String expected = Files.readString(testFilePlain);
+        String expected = Files.readString(tfp);
         String was = Differ.generate(pathYml1, pathYml2, "plain");
         assertEquals(expected, was);
     }
 
     @Test
     public void generateJsonJson() throws Exception {
-        String expected = Files.readString(testFileJson);
+        String expected = Files.readString(tfj);
         String was = Differ.generate(pathJson1, pathJson2, "json");
         assertEquals(expected, was);
     }
 
     @Test
     public void generateYmlJson() throws Exception {
-        String expected = Files.readString(testFileJson);
+        String expected = Files.readString(tfj);
         String was = Differ.generate(pathYml1, pathYml2, "json");
         assertEquals(expected, was);
     }
 
     @Test
     public void generateJsonStylish() throws Exception {
-        String expected = Files.readString(testFileStylish);
+        String expected = Files.readString(tfs);
         String was = Differ.generate(pathJson1, pathJson2, "stylish");
         assertEquals(expected, was);
     }
 
     @Test
     public void generateYmlStylish() throws Exception {
-        String expected = Files.readString(testFileStylish);
+        String expected = Files.readString(tfs);
         String was = Differ.generate(pathYml1, pathYml2, "stylish");
         assertEquals(expected, was);
     }
