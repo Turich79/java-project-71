@@ -21,6 +21,9 @@ public class Differ {
 
     }
 
+    public static String generate(String filepath1, String filepath2) throws Exception {
+        return generate(filepath1, filepath2, "stylish");
+    }
     private static List<Map<String, Object>> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
         List<Map<String, Object>> result = new ArrayList<>();
 
