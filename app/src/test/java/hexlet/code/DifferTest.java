@@ -72,7 +72,7 @@ class DifferTest {
                 + "  - timeout: 50\n"
                 + "  + timeout: 20\n"
                 + "  + verbose: true\n"
-                + "}\n";
+                + "}";
         String was = Differ.generate(path1, path2, "stylish");
         assertEquals(expected, was);
     }
