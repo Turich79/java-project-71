@@ -62,6 +62,6 @@ public class Differ {
     }
 
     private static Object returnValue(Object value) {
-        return value == null ? "null" : value;
+        return value == null ? "null" : value.toString();
     }
 }

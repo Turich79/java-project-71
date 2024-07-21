@@ -79,5 +79,12 @@ class DifferTest {
         assertEquals(expected, was);
     }
 
+    @Test
+    public void generateYmlIncorrectFormat() throws Exception {
+        String expected = Files.readString(tfs);
+        String was = Differ.generate(pathYml1, pathYml2, "word");
+        assertEquals(expected, was);
+    }
+
 
 }

@@ -12,10 +12,10 @@ Differ - это утилита командной строки, которая �
 
 Для использования утилиты необходимо выполнить следующие команды:
 
-* ./build/install/app/bin/app filepath1.json filepath2.json
-* ./build/install/app/bin/app filepath1.yml filepath2.yml
-* ./build/install/app/bin/app -f plain filepath1.json filepath2.json
-* ./build/install/app/bin/app -f json filepath1.json filepath2.json
+* ./build/install/app/bin/app file1.json file2.json
+* ./build/install/app/bin/app file1.yml file2.yml
+* ./build/install/app/bin/app -f plain file1.json file2.json
+* ./build/install/app/bin/app -f json file1.json file2.json
 
 ### где:
 
@@ -33,4 +33,5 @@ Differ - это утилита командной строки, которая �
 
 *json* - вывод в формате JSON.
 
-https://asciinema.org/a/Swduf0yNavL4TZQeHrfiBgvds
+## Пример работы утилиты
+https://asciinema.org/a/E8rmnjednGJl8W1OgCjzc1HyZ
