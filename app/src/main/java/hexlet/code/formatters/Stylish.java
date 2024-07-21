@@ -23,7 +23,7 @@ public class Stylish {
             }
 
         }
-        result.append("}");
+        result.append("}\n");
         return result.toString();
     }
 }
