@@ -1,10 +1,8 @@
 package hexlet.code.formatters;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 
 public class Plain {
     public static String formatPlain(List<Map<String, Object>> differences) {
@@ -30,18 +28,15 @@ public class Plain {
         }
 
         return result.toString().trim();
-
     }
 
     public static String complexValue(Object data) {
-        if (data instanceof Object[] || data instanceof Collections || data instanceof Map
-                || data instanceof ArrayList<?>) {
+        if (data instanceof Object[]  || data instanceof Map || data instanceof ArrayList<?>) {
             return "[complex value]";
         } else if (data instanceof String) {
             return "'" + data + "'";
-        } else if (data == null) {
-            return null;
+        } else {
+            return String.valueOf(data);
         }
-        return data.toString();
     }
 }

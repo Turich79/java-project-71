@@ -5,28 +5,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public class Parser {
-    public static Map<String, Object> parse(String filepath) throws Exception {
-        String content = readFile(filepath);
-        String format = getFileType(filepath);
+    public static Map<String, Object> parse(String content, String format) throws JsonProcessingException {
         return makeMap(content, format);
-    }
-
-    private static String readFile(String filepath) throws Exception {
-        Path file1 = Paths.get(filepath).toAbsolutePath().normalize();
-        if (!Files.exists(file1)) {
-            throw new Exception("File '" + filepath + "' does not exist");
-        }
-        return Files.readString(file1);
-    }
-
-    private static String getFileType(String filepath) {
-        return filepath.substring(filepath.indexOf(".") + 1);
     }
 
     private static Map<String, Object> makeMap(String content, String format) throws JsonProcessingException {
