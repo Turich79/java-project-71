@@ -4,12 +4,11 @@ import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String formStyle(List<Map<String, Object>> listComp, String format) throws IOException {
+    public static String formStyle(List<Map<String, Object>> listComp, String format) throws Exception {
         switch (format) {
             case "stylish":
                 return Stylish.formatStylish(listComp);
@@ -18,8 +17,7 @@ public class Formatter {
             case "json":
                 return Json.formatJson(listComp);
             default:
-                System.out.println("Format" + format + "is not correct!");
+                throw new Exception("Format" + format + "is not correct!");
         }
-        return Stylish.formatStylish(listComp);
     }
 }

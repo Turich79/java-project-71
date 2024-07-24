@@ -22,23 +22,20 @@ public class Compar {
             Object value1 = map1.get(key);
             Object value2 = map2.get(key);
             Map<String, Object> map = new LinkedHashMap<>();
+            map.put("key", key);
 
             if (!has1 && has2) {
-                map.put("key", key);
-                map.put("newValue", value2);
+                map.put("value2", value2);
                 map.put("status", "added");
             } else if (has1 && !has2) {
-                map.put("key", key);
-                map.put("oldValue", value1);
+                map.put("value1", value1);
                 map.put("status", "removed");
             } else if (!Objects.equals(value1, value2)) {
-                map.put("key", key);
-                map.put("oldValue", value1);
-                map.put("newValue", value2);
+                map.put("value1", value1);
+                map.put("value2", value2);
                 map.put("status", "updated");
             } else {
-                map.put("key", key);
-                map.put("oldValue", value1);
+                map.put("value", value1);
                 map.put("status", "unchanged");
             }
 

@@ -27,9 +27,6 @@ public class Differ {
 
     private static String readFile(String filepath) throws Exception {
         Path file1 = Paths.get(filepath).toAbsolutePath().normalize();
-        if (!Files.exists(file1)) {
-            throw new Exception("File '" + filepath + "' does not exist");
-        }
         return Files.readString(file1);
     }
 
