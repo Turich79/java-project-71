@@ -17,17 +17,15 @@ public class Compar {
         keysSet.addAll(map2.keySet());
 
         for (String key : keysSet) {
-            boolean has1 = map1.containsKey(key);
-            boolean has2 = map2.containsKey(key);
             Object value1 = map1.get(key);
             Object value2 = map2.get(key);
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("key", key);
 
-            if (!has1 && has2) {
+            if (!map1.containsKey(key)) {
                 map.put("value2", value2);
                 map.put("status", "added");
-            } else if (has1 && !has2) {
+            } else if (!map2.containsKey(key)) {
                 map.put("value1", value1);
                 map.put("status", "removed");
             } else if (!Objects.equals(value1, value2)) {

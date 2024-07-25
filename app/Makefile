@@ -15,17 +15,14 @@ install:
 run-dist:
 	./build/install/app/bin/app 
 
-run-dist-files:
-	./build/install/app/bin/app -f=stylish file1.json file2.json
-
 run-stylish:
-	./build/install/app/bin/app -f stylish file1_.json file2_.json
+	./build/install/app/bin/app -f stylish /home/artur/java/java-project-71/app/src/test/resources/fixtures/file1.json	/home/artur/java/java-project-71/app/src/test/resources/fixtures/file2.json
 
 run-plain:
-	./build/install/app/bin/app -f plain file1_.json file2_.json
+	./build/install/app/bin/app -f plain /home/artur/java/java-project-71/app/src/test/resources/fixtures/file1.json	/home/artur/java/java-project-71/app/src/test/resources/fixtures/file2.json
 
 run-json:
-	./build/install/app/bin/app -f json file1_.json file2_.json
+	./build/install/app/bin/app -f json /home/artur/java/java-project-71/app/src/test/resources/fixtures/file1.json	/home/artur/java/java-project-71/app/src/test/resources/fixtures/file2.json
 
 run:
 	./gradlew run
